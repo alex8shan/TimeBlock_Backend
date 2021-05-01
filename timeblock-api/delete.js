@@ -11,7 +11,10 @@ export const main = handler(async (event, context) => {
         timeslot: data.timeslot,
         },
     };
-  await dynamoDb.delete(params);
-
+    try{
+        await dynamoDb.delete(params);
+      } catch (e) {
+        return e;
+      }
   return { status: true };
 });
